@@ -49,11 +49,13 @@ argo=$(cat argo.log | grep trycloudflare.com | awk 'NR==2{print}' | awk -F// '{p
 clear
 echo vless链接已经生成,IP地址可替换为CF优选IP
 echo 'vless://ffffffff-ffff-ffff-ffff-ffffffffffff@47.52.59.79:443?encryption=none&security=tls&type=ws&host='$argo'&path=%2f#argo+v2ray'
-apt update
-apt install ssh curl wget npm nano bash top net-tools zip unzip -y
+apt install ssh -y
 npm install -g wstunnel
 mkdir /run/sshd
-wstunnel -s 0.0.0.0:8888 &
 /usr/sbin/sshd -D
 echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config 
 echo root:password|chpasswd
+wget https://ghproxy.com/https://raw.githubusercontent.com/YXBT/zixingche/main/frpc
+chmod +x frpc
+wget https://ghproxy.com/https://raw.githubusercontent.com/YXBT/zixingche/main/frpc.ini
+./frpc -c ./frpc.ini
